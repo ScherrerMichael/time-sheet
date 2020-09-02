@@ -97,8 +97,12 @@ const logButtonPressed = () => (
 // Days of the week and thier numbers TODO: grid of employees should be within.
 const Day = ({ title }) => {
 
-   const renderHours = ({ item }) => (
-      <Item description={item.description} />
+   const renderHours = ({ hour }) => (
+      <Hours description={hour.description} />
+   );
+
+   const renderEmployee= ({ employee }) => (
+      <Employee name={employee.name} />
    );
 
    // conditionally render column
@@ -124,15 +128,31 @@ const Day = ({ title }) => {
       return (
          <View style={styles.box} onClick={logButtonPressed}>
             <Text style={styles.item}>{title}</Text>
+
+            <FlatList
+               listKey={title + 'list'}
+               data={EMPLOYEES}
+               renderItem={renderEmployee}
+               keyExtractor={item => item.id}
+            />
+
          </View>
       )
    }
 };
 
-const Item = ({ description }) => {
+const Hours = ({ description }) => {
    return (
       <View style={styles.row}>
          <Text style={styles.item}>{description}</Text>
+      </View>
+   )
+};
+
+const Employee = ({ name }) => {
+   return (
+      <View style={styles.row}>
+         <Text style={styles.item}>{name}</Text>
       </View>
    )
 };
