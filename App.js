@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { SafeAreaView, FlatList, StatusBar, StyleSheet, Text, View, Alert } from "react-native";
+import React, { useState , Component} from "react";
+import { SafeAreaView, FlatList, TextInput, StyleSheet, Text, View, Alert, Button } from "react-native";
 import { format } from "date-fns";
 import { addMonths } from "date-fns";
 import { subMonths } from "date-fns";
 
 // contains information about current month and year
 const header = () => {
+   const[value, onChangeText] = useState('Employee Name');
    const dateFormat = "MMMM yyyy";
    const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -29,7 +30,7 @@ const header = () => {
 const WEEKDAYS = [
    {
       id: 0,
-      title: '*',
+      title: '',
    },
    {
       id: 1,
@@ -61,24 +62,18 @@ const WEEKDAYS = [
    },
 ];
 
-const HOURS = [
-   {
-      id: 'early',
-      description: '9-5',
-      hours: '9-5',
-   },
-]
-
-const EMPLOYEES = [
+const DATA = [
    {
       id: 'yeet',
       name: 'Michael',
       phone: '2069462212',
+      schedule: ['9-5', '0', '0', '0','0','0','0']
    },
    {
       id: 'yeet2',
       name: 'Roudy',
       phone: '2069462212',
+      schedule: ['9-5', '0', '0', '0','0','0','0']
    },
 ]
 
@@ -94,68 +89,31 @@ const logButtonPressed = () => (
    console.log('pressed a button')
 );
 
-// Days of the week and thier numbers TODO: grid of employees should be within.
+const Schedule = ({ name }) => {
+   return (
+      <View style={styles.row}>
+         <TextInput style={styles.item} onChangeText={text => onChangeText(text)}
+      value='hello'/>
+         <TextInput style={styles.item}>{name}</TextInput>
+         <TextInput style={styles.item}>{name}</TextInput>
+         <TextInput style={styles.item}>{name}</TextInput>
+         <TextInput style={styles.item}>{name}</TextInput>
+         <TextInput style={styles.item}>{name}</TextInput>
+         <TextInput style={styles.item}>{name}</TextInput>
+         <TextInput style={[styles.item, {borderRightWidth:'thin'}]}>{name}</TextInput>
+      </View>
+   )
+};
+
+// Weekdays
 const Day = ({ title }) => {
-
-   const renderHours = ({ hour }) => (
-      <Hours description={hour.description} />
-   );
-
-   const renderEmployee= ({ employee }) => (
-      <Employee name={employee.name} />
-   );
-
-   // conditionally render column
-   console.log(title);
-
-   if (title !== '*') {
       return (
-         <View style={styles.box} onClick={logButtonPressed}>
-            <Text style={styles.item}>{title}</Text>
-
-            <FlatList
-               listKey={title + 'list'}
-               data={HOURS}
-               renderItem={renderHours}
-               keyExtractor={item => item.id}
-            />
-
+         <View onClick={logButtonPressed}>
+            <Text style={styles.weekday}>{title}</Text>
          </View>
       )
-   }
-   else
-   {
-      return (
-         <View style={styles.box} onClick={logButtonPressed}>
-            <Text style={styles.item}>{title}</Text>
+   };
 
-            <FlatList
-               listKey={title + 'list'}
-               data={EMPLOYEES}
-               renderItem={renderEmployee}
-               keyExtractor={item => item.id}
-            />
-
-         </View>
-      )
-   }
-};
-
-const Hours = ({ description }) => {
-   return (
-      <View style={styles.row}>
-         <Text style={styles.item}>{description}</Text>
-      </View>
-   )
-};
-
-const Employee = ({ name }) => {
-   return (
-      <View style={styles.row}>
-         <Text style={styles.item}>{name}</Text>
-      </View>
-   )
-};
 
 const App = () => {
 
@@ -172,6 +130,11 @@ const App = () => {
             keyExtractor={item => item.id}
             numColumns={8}
          />
+         <Schedule />
+         <Schedule />
+         <Schedule />
+         <Schedule />
+         <Button title='Add'></Button>
       </SafeAreaView>
    );
 }
@@ -188,19 +151,29 @@ const styles = StyleSheet.create({
       width: '100%',
       alignItems: 'center',
    },
-   box: {
-      borderWidth: 1,
-   },
-   row: {
-      borderTopWidth: 1,
-   },
-   item: {
-      backgroundColor: 'lightgray',
+   weekday: {
       textAlign: 'center',
       width: 125,
       padding: 20,
       marginVertical: 4,
       marginHorizontal: 3,
+   },
+   box: {
+      borderWidth: 1,
+   },
+   row: {
+      flex: 1,
+      flexDirection:'row',
+   },
+   item: {
+      borderWidth:'thin',
+      borderRightWidth:0,
+      // backgroundColor: 'lightgray',
+      textAlign: 'center',
+      width: 130,
+      padding: 20,
+      // marginVertical: 4,
+      // marginHorizontal: 1,
    },
    colorBlue: {
       backgroundColor: 'blue',
