@@ -160,7 +160,7 @@ const App = () => {
             keyExtractor={item => item.id}
             numColumns={8}
          />
-         <Schedule />
+         <Schedule/>
          <Button title='Add' onPress={logButtonPressed}></Button>
       </SafeAreaView>
    );
@@ -193,15 +193,15 @@ const styles = StyleSheet.create({
       flexDirection:'row',
    },
    item: {
-      borderWidth:'thin',
+      borderWidth:1,
       borderRightWidth:0,
       height: 55,
       width: 130,
       padding: 20,
    },
    endItem: {
-      borderWidth:'thin',
-      borderRightWidth:'thin',
+      borderWidth:1,
+      borderRightWidth:1,
       height: 55,
       width: 130,
       padding: 20,
@@ -211,9 +211,10 @@ const styles = StyleSheet.create({
    },
    name: {
       textAlign:'center',
+      fontSize: 12,
    },
-   colorBlue: {
-      backgroundColor: 'blue',
+   inOut: {
+
    },
 });
 
