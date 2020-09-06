@@ -1,4 +1,4 @@
-import React, { useState , Component} from "react";
+import React, { useState, Component } from "react";
 import { SafeAreaView, FlatList, TextInput, StyleSheet, Text, View, Alert, Button } from "react-native";
 import { format } from "date-fns";
 import { addMonths } from "date-fns";
@@ -6,7 +6,7 @@ import { subMonths } from "date-fns";
 
 // contains information about current month and year
 const header = () => {
-   const[value, onChangeText] = useState('Employee Name');
+   const [value, onChangeText] = useState('Employee Name');
    const dateFormat = "MMMM yyyy";
    const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -67,13 +67,13 @@ const DATA = [
       id: 'yeet',
       name: 'Michael',
       phone: '2069462212',
-      schedule: ['9-5', '0', '0', '0','0','0','0']
+      schedule: ['9-5', '0', '0', '0', '0', '0', '0']
    },
    {
       id: 'yeet2',
       name: 'Roudy',
       phone: '2069462212',
-      schedule: ['9-5', '0', '0', '0','0','0','0']
+      schedule: ['9-5', '0', '0', '0', '0', '0', '0']
    },
 ]
 
@@ -85,67 +85,99 @@ const prevMonth = () => {
    setCurrentDate(subMonths(currentDate, 1));
 };
 
-const logButtonPressed = () => (
-   console.log('pressed a button')
-);
+const Schedules = () => {
+   return (<View>{schedules}</View>)
+}
 
 const NameBox = (props) => {
    return (
-         <View>
+      <View>
          <Text style={[styles.item, styles.name]}> Michael Scherrer</Text>
          <Text style={styles.item}> In/Out</Text>
          <Text style={styles.item}> In/Out</Text>
-         </View>
+      </View>
    );
 }
 
 const DoubleBox = (props) => {
    return (
-         <View>
+      <View>
          <TextInput style={styles.item}></TextInput>
          <View style={styles.item} />
          <View style={styles.item} />
-         </View>
+      </View>
    );
 }
 
 const EndBox = (props) => {
    return (
-         <View>
+      <View>
          <TextInput style={styles.endItem}></TextInput>
          <View style={styles.endItem} />
          <View style={styles.endItem} />
-         </View>
+      </View>
    );
 }
 
 
-const Schedule = ({ props }) => {
-   return (
+// const Schedule = ({ props }) => {
+//    return (
+//       <View style={styles.row}>
+//          <NameBox props={props} />
+//          <DoubleBox props={props} />
+//          <DoubleBox props={props} />
+//          <DoubleBox props={props} />
+//          <DoubleBox props={props} />
+//          <DoubleBox props={props} />
+//          <DoubleBox props={props} />
+//          <EndBox />
+//       </View>
+//    )
+// };
+
+class Schedule extends React.Component {
+   constructor(props){
+   super(props);
+   this.state = {
+      schedules: []
+      };
+   }
+
+   render() {
+      return (
       <View style={styles.row}>
-         <NameBox props={props}/>
-         <DoubleBox props={props}/>
-         <DoubleBox props={props}/>
-         <DoubleBox props={props}/>
-         <DoubleBox props={props}/>
-         <DoubleBox props={props}/>
-         <DoubleBox props={props}/>
+         <NameBox />
+         <DoubleBox />
+         <DoubleBox />
+         <DoubleBox />
+         <DoubleBox />
+         <DoubleBox />
+         <DoubleBox />
          <EndBox />
+      </View>
+      )
+   }
+
+}
+
+// Weekdays
+const Day = ({ title }) => {
+   return (
+      <View>
+         <Text style={styles.weekday}>{title}</Text>
       </View>
    )
 };
 
-// Weekdays
-const Day = ({ title }) => {
-      return (
-         <View>
-            <Text style={styles.weekday}>{title}</Text>
-         </View>
-      )
-   };
-
 
 const App = () => {
+
+   const [schedules, setSchedules] = useState([]);
+
+   const addSchedule = () => {
+      console.log('button pressed');
+      setSchedules(schedules.push(<Schedule />));
+   }
 
    const renderDay = ({ item }) => (
       <Day title={item.title} />
@@ -160,8 +192,8 @@ const App = () => {
             keyExtractor={item => item.id}
             numColumns={8}
          />
-         <Schedule/>
-         <Button title='Add' onPress={logButtonPressed}></Button>
+         <Schedule />
+         {/* <Button title='Add' onPress={addSchedule}></Button> */}
       </SafeAreaView>
    );
 }
@@ -190,18 +222,18 @@ const styles = StyleSheet.create({
    },
    row: {
       flex: 1,
-      flexDirection:'row',
+      flexDirection: 'row',
    },
    item: {
-      borderWidth:1,
-      borderRightWidth:0,
+      borderWidth: 1,
+      borderRightWidth: 0,
       height: 55,
       width: 130,
       padding: 20,
    },
    endItem: {
-      borderWidth:1,
-      borderRightWidth:1,
+      borderWidth: 1,
+      borderRightWidth: 1,
       height: 55,
       width: 130,
       padding: 20,
@@ -210,7 +242,7 @@ const styles = StyleSheet.create({
       height: 40,
    },
    name: {
-      textAlign:'center',
+      textAlign: 'center',
       fontSize: 12,
    },
    inOut: {
