@@ -89,18 +89,27 @@ const logButtonPressed = () => (
    console.log('pressed a button')
 );
 
-const Schedule = ({ name }) => {
+const DoubleBox = ({props}) => {
+   return (
+         <View>
+         <TextInput style={styles.item}>{props}</TextInput>
+         <View style={styles.item} />
+         <View style={styles.item} />
+         </View>
+   );
+}
+
+const Schedule = ({ props }) => {
    return (
       <View style={styles.row}>
-         <TextInput style={styles.item} onChangeText={text => onChangeText(text)}
-      value='hello'/>
-         <TextInput style={styles.item}>{name}</TextInput>
-         <TextInput style={styles.item}>{name}</TextInput>
-         <TextInput style={styles.item}>{name}</TextInput>
-         <TextInput style={styles.item}>{name}</TextInput>
-         <TextInput style={styles.item}>{name}</TextInput>
-         <TextInput style={styles.item}>{name}</TextInput>
-         <TextInput style={[styles.item, {borderRightWidth:'thin'}]}>{name}</TextInput>
+         <DoubleBox props={props}/>
+         <DoubleBox props={props}/>
+         <DoubleBox props={props}/>
+         <DoubleBox props={props}/>
+         <DoubleBox props={props}/>
+         <DoubleBox props={props}/>
+         <DoubleBox props={props}/>
+         <DoubleBox style={[styles.item, {borderRightWidth:'thin'}]} />
       </View>
    )
 };
@@ -130,9 +139,6 @@ const App = () => {
             keyExtractor={item => item.id}
             numColumns={8}
          />
-         <Schedule />
-         <Schedule />
-         <Schedule />
          <Schedule />
          <Button title='Add'></Button>
       </SafeAreaView>
