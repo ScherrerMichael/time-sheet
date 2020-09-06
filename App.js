@@ -89,12 +89,22 @@ const logButtonPressed = () => (
    console.log('pressed a button')
 );
 
-const DoubleBox = ({props}) => {
+const DoubleBox = (props) => {
    return (
          <View>
-         <TextInput style={styles.item}>{props}</TextInput>
+         <TextInput style={styles.item}></TextInput>
          <View style={styles.item} />
          <View style={styles.item} />
+         </View>
+   );
+}
+
+const NameBox = (props) => {
+   return (
+         <View>
+         <Text style={[styles.item, styles.name]}> Michael Scherrer</Text>
+         <Text style={styles.item}> In/Out</Text>
+         <Text style={styles.item}> In/Out</Text>
          </View>
    );
 }
@@ -102,7 +112,7 @@ const DoubleBox = ({props}) => {
 const Schedule = ({ props }) => {
    return (
       <View style={styles.row}>
-         <DoubleBox props={props}/>
+         <NameBox props={props}/>
          <DoubleBox props={props}/>
          <DoubleBox props={props}/>
          <DoubleBox props={props}/>
@@ -174,12 +184,16 @@ const styles = StyleSheet.create({
    item: {
       borderWidth:'thin',
       borderRightWidth:0,
-      // backgroundColor: 'lightgray',
       textAlign: 'center',
+      height: 55,
       width: 130,
       padding: 20,
-      // marginVertical: 4,
-      // marginHorizontal: 1,
+   },
+   hours: {
+      height: 40,
+   },
+   name: {
+      lineHeight: 15,
    },
    colorBlue: {
       backgroundColor: 'blue',
