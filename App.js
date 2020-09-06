@@ -89,6 +89,16 @@ const logButtonPressed = () => (
    console.log('pressed a button')
 );
 
+const NameBox = (props) => {
+   return (
+         <View>
+         <Text style={[styles.item, styles.name]}> Michael Scherrer</Text>
+         <Text style={styles.item}> In/Out</Text>
+         <Text style={styles.item}> In/Out</Text>
+         </View>
+   );
+}
+
 const DoubleBox = (props) => {
    return (
          <View>
@@ -99,15 +109,16 @@ const DoubleBox = (props) => {
    );
 }
 
-const NameBox = (props) => {
+const EndBox = (props) => {
    return (
          <View>
-         <Text style={[styles.item, styles.name]}> Michael Scherrer</Text>
-         <Text style={styles.item}> In/Out</Text>
-         <Text style={styles.item}> In/Out</Text>
+         <TextInput style={styles.endItem}></TextInput>
+         <View style={styles.endItem} />
+         <View style={styles.endItem} />
          </View>
    );
 }
+
 
 const Schedule = ({ props }) => {
    return (
@@ -119,7 +130,7 @@ const Schedule = ({ props }) => {
          <DoubleBox props={props}/>
          <DoubleBox props={props}/>
          <DoubleBox props={props}/>
-         <DoubleBox style={[styles.item, {borderRightWidth:'thin'}]} />
+         <EndBox />
       </View>
    )
 };
@@ -127,7 +138,7 @@ const Schedule = ({ props }) => {
 // Weekdays
 const Day = ({ title }) => {
       return (
-         <View onClick={logButtonPressed}>
+         <View>
             <Text style={styles.weekday}>{title}</Text>
          </View>
       )
@@ -150,7 +161,7 @@ const App = () => {
             numColumns={8}
          />
          <Schedule />
-         <Button title='Add'></Button>
+         <Button title='Add' onPress={logButtonPressed}></Button>
       </SafeAreaView>
    );
 }
@@ -184,7 +195,13 @@ const styles = StyleSheet.create({
    item: {
       borderWidth:'thin',
       borderRightWidth:0,
-      textAlign: 'center',
+      height: 55,
+      width: 130,
+      padding: 20,
+   },
+   endItem: {
+      borderWidth:'thin',
+      borderRightWidth:'thin',
       height: 55,
       width: 130,
       padding: 20,
@@ -193,7 +210,7 @@ const styles = StyleSheet.create({
       height: 40,
    },
    name: {
-      lineHeight: 15,
+      textAlign:'center',
    },
    colorBlue: {
       backgroundColor: 'blue',
