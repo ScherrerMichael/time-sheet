@@ -173,15 +173,13 @@ const Day = ({ title }) => {
 
 const App = () => {
 
-   let key = 0;
-
-   const [schedules, setSchedules] = useState([]);
+   const [schedule, setSchedules] = useState([]);
 
    const addSchedule = () => {
-      console.log({schedules});
-      schedules.push(<Schedule key ={key}/>);
-      key++;
-      setSchedules(schedules);
+      let schedulesArray = [...schedule];
+      schedulesArray.push(<Schedule/>);
+      console.log(schedulesArray);
+      setSchedules(schedulesArray);
    }
 
    const renderDay = ({ item }) => (
@@ -197,10 +195,8 @@ const App = () => {
             keyExtractor={item => item.id}
             numColumns={8}
          />
-         {/* <Schedule /> */}
-         {/* <View>{schedules}</View> */}
-         {schedules}
-         <Button title='Press Me' onPress={addSchedule}></Button>
+         {schedule}
+         <Button title='Add Employee' onPress={addSchedule}></Button>
       </SafeAreaView>
    );
 }
