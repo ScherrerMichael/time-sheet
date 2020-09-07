@@ -175,8 +175,9 @@ const App = () => {
    const [schedules, setSchedules] = useState([]);
 
    const addSchedule = () => {
-      console.log('button pressed');
-      setSchedules(schedules.push(<Schedule />));
+      console.log({schedules});
+      schedules.push(<Schedule/>);
+      setSchedules(schedules);
    }
 
    const renderDay = ({ item }) => (
@@ -192,8 +193,10 @@ const App = () => {
             keyExtractor={item => item.id}
             numColumns={8}
          />
-         <Schedule />
-         {/* <Button title='Add' onPress={addSchedule}></Button> */}
+         {/* <Schedule /> */}
+         {/* <View>{schedules}</View> */}
+         {schedules}
+         <Button title='Press Me' onPress={addSchedule}></Button>
       </SafeAreaView>
    );
 }
