@@ -120,45 +120,45 @@ const EndBox = (props) => {
 }
 
 
-// const Schedule = ({ props }) => {
-//    return (
-//       <View style={styles.row}>
-//          <NameBox props={props} />
-//          <DoubleBox props={props} />
-//          <DoubleBox props={props} />
-//          <DoubleBox props={props} />
-//          <DoubleBox props={props} />
-//          <DoubleBox props={props} />
-//          <DoubleBox props={props} />
-//          <EndBox />
-//       </View>
-//    )
-// };
-
-class Schedule extends React.Component {
-   constructor(props){
-   super(props);
-   this.state = {
-      schedules: []
-      };
-   }
-
-   render() {
-      return (
+const Schedule = ({ props }) => {
+   return (
       <View style={styles.row}>
-         <NameBox />
-         <DoubleBox />
-         <DoubleBox />
-         <DoubleBox />
-         <DoubleBox />
-         <DoubleBox />
-         <DoubleBox />
+         <NameBox props={props} />
+         <DoubleBox props={props} />
+         <DoubleBox props={props} />
+         <DoubleBox props={props} />
+         <DoubleBox props={props} />
+         <DoubleBox props={props} />
+         <DoubleBox props={props} />
          <EndBox />
       </View>
-      )
-   }
+   )
+};
 
-}
+// class Schedule extends React.Component {
+//    constructor(props){
+//    super(props);
+//    this.state = {
+//       schedules: []
+//       };
+//    }
+
+//    render() {
+//       return (a
+//       <View style={styles.row}>
+//          <NameBox />
+//          <DoubleBox />
+//          <DoubleBox />
+//          <DoubleBox />
+//          <DoubleBox />
+//          <DoubleBox />
+//          <DoubleBox />
+//          <EndBox />
+//       </View>
+//       )
+//    }
+
+// }
 
 // Weekdays
 const Day = ({ title }) => {
@@ -169,14 +169,18 @@ const Day = ({ title }) => {
    )
 };
 
+//instead of adding componenets to the array, I should add actuall array values. Then loop through this array..
 
 const App = () => {
+
+   let key = 0;
 
    const [schedules, setSchedules] = useState([]);
 
    const addSchedule = () => {
       console.log({schedules});
-      schedules.push(<Schedule/>);
+      schedules.push(<Schedule key ={key}/>);
+      key++;
       setSchedules(schedules);
    }
 
